@@ -478,6 +478,7 @@ def _create_reader(numbering, content_types, relationships, styles, docx_file, f
         "v:rect": read_child_elements,
         "v:roundrect": read_child_elements,
         "v:shape": read_child_elements,
+        "v:group": read_child_elements,
         "v:textbox": read_child_elements,
         "w:txbxContent": read_child_elements,
         "w:pict": pict,
