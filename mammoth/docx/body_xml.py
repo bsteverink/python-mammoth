@@ -78,6 +78,9 @@ def _create_reader(numbering, content_types, relationships, styles, docx_file, f
         vertical_alignment = properties \
             .find_child_or_null("w:vertAlign") \
             .attributes.get("w:val")
+
+        highlight = properties.find_child_or_null("w:highlight").attributes.get("w:val")
+
         font = properties.find_child_or_null("w:rFonts").attributes.get("w:ascii")
 
         is_bold = read_boolean_element(properties.find_child("w:b"))
@@ -104,6 +107,7 @@ def _create_reader(numbering, content_types, relationships, styles, docx_file, f
                 is_italic=is_italic,
                 is_underline=is_underline,
                 is_strikethrough=is_strikethrough,
+                highlight=highlight,
                 is_small_caps=is_small_caps,
                 vertical_alignment=vertical_alignment,
                 font=font,

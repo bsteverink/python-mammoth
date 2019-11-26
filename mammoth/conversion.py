@@ -123,6 +123,8 @@ class _DocumentConverter(documents.element_visitor(args=1)):
             paths.append(self._find_style_for_run_property("italic", default="em"))
         if run.is_bold:
             paths.append(self._find_style_for_run_property("bold", default="strong"))
+        if run.highlight:
+            paths.append(html_paths.element(["span"], fresh=False, styles=["background-color: {0}".format(run.highlight)]))
         paths.append(self._find_html_path_for_run(run))
 
         for path in paths:
@@ -353,7 +355,7 @@ class _DocumentConverter(documents.element_visitor(args=1)):
 
 
 def _document_matcher_matches(matcher, element, element_type):
-    if matcher.element_type in ["underline", "strikethrough", "small_caps", "bold", "italic", "comment_reference"]:
+    if matcher.element_type in ["underline", "strikethrough", "small_caps", "highlight", "bold", "italic", "comment_reference"]:
         return matcher.element_type == element_type
     elif matcher.element_type == "break":
         return (
